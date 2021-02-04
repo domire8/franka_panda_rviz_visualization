@@ -1,0 +1,3 @@
+[submodule "src/franka_panda_description"]
+	path = src/franka_panda_description
+	url = https://github.com/justagist/franka_panda_description.git
