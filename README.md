@@ -3,6 +3,11 @@
 Simple RViz visualization of the Franka Panda 7DOF robot. This repository is meant to provide an easy way to visualize
 and write urdf.xacro files of the Franka Panda robot. It can easily be extened to other robots too.
 
+Note: The *franka_panda_description* submodule is not the official *franka_description* package from the *franka_ros*
+repository because it has better and more accurate description and urdf tags of the Franka Panda (
+see [here](https://github.com/justagist/franka_panda_description)
+and [here](https://hal.inria.fr/hal-02265293/document) for more detail).
+
 ## Usage instructions
 
 ### First steps
@@ -61,3 +66,8 @@ roslaunch franka_panda_rviz_visualization visualization.launch
 
 RViz should be launch showing a Franka Panda robot, as well as the joint state publisher GUI to change the positions of
 the robot joints interactively.
+
+## Development
+
+To visualize and develop other robots from different urdf files and xacro macros, simply change the path in
+visualization.launch to the desired file.
