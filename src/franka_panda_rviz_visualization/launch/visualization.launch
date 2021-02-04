@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<launch>
+  <arg name="dockerized" default="false"/>
+  <arg name="robot_name" default="panda_arm"/>
+  <!-- The recommended way of specifying the URDF file is to pass it in directly. -->
+  <arg name="robot_path" default="$(find franka_panda_description)/robots"/>
+  <arg name="robot_urdf_file" default="$(arg robot_path)/$(arg robot_name).urdf.xacro" />
+
+  <arg name="rviz_config" default="$(find franka_panda_rviz_visualization)/launch/rviz.rviz"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro.py --inorder $(arg robot_urdf_file)"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui"/>
+
+  <node name="panda_rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(arg rviz_config)" output="screen"/>
+</launch>

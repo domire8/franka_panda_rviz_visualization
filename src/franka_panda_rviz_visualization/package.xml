@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>franka_panda_rviz_visualization</name>
+  <version>0.0.0</version>
+  <description>Simpe RViz Visualization of the Franka Panda</description>
+  <maintainer email="dominic.reber@epfl.ch">Dominic Reber</maintainer>
+  <license>GPLv2</license>
+  <author email="dominic.reber@epfl.ch">Dominic Reber</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>franka_panda_description</depend>
+</package>
