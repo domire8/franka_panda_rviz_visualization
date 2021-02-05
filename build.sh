@@ -9,6 +9,11 @@ while getopts 'r' opt; do
 done
 shift "$(( OPTIND - 1 ))"
 
+if [ "$(uname -s)" != "Linux" ]; then
+  echo "This Docker image is currently only running on Linux. Aborting the build..."
+  exit 1
+fi
+
 BASE_IMAGE=osrf/ros
 BASE_TAG=melodic-desktop
 
