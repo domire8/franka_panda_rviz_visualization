@@ -19,8 +19,6 @@ BASE_TAG=melodic-desktop
 
 docker pull ${BASE_IMAGE}:${BASE_TAG}
 
-NAME=$(echo "${PWD##*/}" | tr _ -)
-
 UID="$(id -u "${USER}")"
 GID="$(id -g "${USER}")"
 
@@ -28,19 +26,25 @@ if [ "$(uname -s)" = "Darwin" ]; then
     GID=1000
 fi
 
+NAME=$(echo "${PWD##*/}" | tr _ -)
+MULTISTAGE_TARGET=develop
+IMAGE_TAG=latest
+
 if [ "$REBUILD" -eq 1 ]; then
-	docker build \
-    	--no-cache \
-    	--build-arg BASE_IMAGE=${BASE_IMAGE} \
-    	--build-arg BASE_TAG=${BASE_TAG} \
+	DOCKER_BUILDKIT=1 docker build \
+    --no-cache \
+    --target "$MULTISTAGE_TARGET" \
+    --build-arg BASE_IMAGE=${BASE_IMAGE} \
+    --build-arg BASE_TAG=${BASE_TAG} \
  		--build-arg UID=${UID} \
  		--build-arg GID=${GID} \
- 		-t ${NAME}:${BASE_TAG} .
+ 		-t "$NAME":"$IMAGE_TAG" .
  else
-	docker build \
-	    --build-arg BASE_IMAGE=${BASE_IMAGE} \
-	    --build-arg BASE_TAG=${BASE_TAG} \
+	DOCKER_BUILDKIT=1 docker build \
+    --target "$MULTISTAGE_TARGET" \
+	  --build-arg BASE_IMAGE=${BASE_IMAGE} \
+	  --build-arg BASE_TAG=${BASE_TAG} \
  		--build-arg UID=${UID} \
  		--build-arg GID=${GID} \
- 		-t ${NAME}:${BASE_TAG} .
+ 		-t "$NAME":"$IMAGE_TAG" .
  fi

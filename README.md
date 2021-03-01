@@ -24,21 +24,37 @@ installation of ROS Melodic.
 
 ### Docker Usage
 
-First, build and run the image:
+There are two ways to run the docker image:
 
+#### Build and run image locally (for developers)
+If you want to build the image yourself and run the local image, use
 ```bash
 ./build.sh
-./run.sh
+./run.sh -l
 ```
 in bash, or 
 
 ```bash
-bash run.sh
 bash build.sh
+bash run.sh -l
 ```
 in zsh.
 
-This creates a Docker container with a shared volume that mounts the `src` directory of this repository directly to
+#### Pull the image from the repository
+To pull the image from the GitHub Container Registry, run
+```bash
+./run.sh
+```
+in bash, or
+
+```bash
+bash run.sh
+```
+in zsh.
+
+#### Using the container
+
+The steps above create a Docker container with a shared volume that mounts the `src` directory of this repository directly to
 the `src` directory of the ROS workspace inside the container. Once you entered the container, simply run
 
 ```bash
